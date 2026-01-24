@@ -33,6 +33,8 @@ export class Phone extends Component {
         number: number
       }
 
+      // this.state.contacts.push(newContact)
+      // console.log(this.state)
       this.setState(prevState => ({
         contacts: [...prevState.contacts, newContact]
       }));
@@ -43,12 +45,17 @@ export class Phone extends Component {
   }
 
   findContact = (e) => {
-    console.log(e.target.value)
+    e.preventDefault()
+    this.setState({
+      filter: e.target.value
+    })
+    this.setState({
+      contacts: this.state.contacts.filter((contact) => contact.name.includes(this.state.filter))
+    })
   }
 
 
   render() {
-    console.log(this.state)
     return (
       <div className="Phone">
 
