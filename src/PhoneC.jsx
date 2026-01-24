@@ -16,7 +16,7 @@ export class Phone extends Component {
 
   deleteContact = (id) => {
     this.setState({
-      todos: this.state.todos.filter(todo => todo.id !== id)
+      contacts: this.state.contacts.filter(contact => contact.id !== id)
     })
   }
 
@@ -68,9 +68,11 @@ export class Phone extends Component {
 
         <div>
           <h2>Contacts</h2>
+          <ul style={{display: "flex", alignItems: "center", flexDirection: "row", justifyContent: "center"}}>
           {this.state.contacts.map(contact => {
-            return <p>{contact.name}: <span>{contact.number}</span></p>
+            return <li style={{display: "flex", alignItems: "center", gap: '20px'}}><p>{contact.name}: <span>{contact.number}</span></p><button onClick={() => this.deleteContact(contact.id)}>Delete</button></li>
           })}
+          </ul>
         </div>
 
       </div>
