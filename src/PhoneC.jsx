@@ -20,12 +20,26 @@ export class Phone extends Component {
     })
   }
 
-  addConact = (name, number) => {
+  addConact = (e) => {
+    e.preventDefault();
+    let name = e.target.name.value;
+    let number = e.target.number.value;
+    if (!this.state.contacts.some(
+      c => c.number === number
+    )) {
       const newContact = {
-    id: nanoid(),
-    name,
-    number
-  }
+        name: name,
+        id: nanoid(),
+        number: number
+      }
+
+      this.setState(prevState => ({
+        contacts: [...prevState.contacts, newContact]
+      }));
+    } else {
+      alert(`You already have a contact with the number of ${number}!`)
+    }
+
   }
 
   findContact = (e) => {
@@ -44,7 +58,6 @@ export class Phone extends Component {
           <input
             type="text"
             name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
           />
@@ -52,7 +65,6 @@ export class Phone extends Component {
           <input
             type="tel"
             name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
           />
@@ -68,10 +80,10 @@ export class Phone extends Component {
 
         <div>
           <h2>Contacts</h2>
-          <ul style={{display: "flex", alignItems: "center", flexDirection: "row", justifyContent: "center"}}>
-          {this.state.contacts.map(contact => {
-            return <li style={{display: "flex", alignItems: "center", gap: '20px'}}><p>{contact.name}: <span>{contact.number}</span></p><button onClick={() => this.deleteContact(contact.id)}>Delete</button></li>
-          })}
+          <ul style={{ display: "flex", alignItems: "center", flexDirection: "column", justifyContent: "center" }}>
+            {this.state.contacts.map(contact => {
+              return <li style={{ display: "flex", alignItems: "center", gap: '20px' }}><p>{contact.name}: <span>{contact.number}</span></p><button onClick={() => this.deleteContact(contact.id)}>Delete</button></li>
+            })}
           </ul>
         </div>
 
