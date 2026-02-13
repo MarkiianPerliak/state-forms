@@ -14,6 +14,19 @@ export class Phone extends Component {
     filter: ''
   }
 
+      componentDidMount() {
+        const lcContacts = JSON.parse(localStorage.getItem('Contacts'));
+        this.setState({
+        contacts: lcContacts
+        })
+    }
+
+    componentDidUpdate() {
+        const contacts = this.state.contacts
+        console.log(contacts)
+        localStorage.setItem('Contacts', JSON.stringify(contacts))
+    }
+
   deleteContact = (id) => {
     this.setState({
       contacts: this.state.contacts.filter(contact => contact.id !== id)
