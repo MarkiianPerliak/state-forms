@@ -15,6 +15,9 @@ export class Phone extends Component {
   }
 
     componentDidMount() {
+        const contacts = this.state.contacts
+        console.log(contacts)
+        localStorage.setItem('Contacts', JSON.stringify(contacts))
         const lcContacts = JSON.parse(localStorage.getItem('Contacts'));
         this.setState({
         contacts: lcContacts
