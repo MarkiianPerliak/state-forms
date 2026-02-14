@@ -14,7 +14,7 @@ export class Phone extends Component {
     filter: ''
   }
 
-      componentDidMount() {
+    componentDidMount() {
         const lcContacts = JSON.parse(localStorage.getItem('Contacts'));
         this.setState({
         contacts: lcContacts
