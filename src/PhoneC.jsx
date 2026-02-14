@@ -15,13 +15,15 @@ export class Phone extends Component {
   }
 
     componentDidMount() {
+      if (localStorage.getItem("Contacts") === null) {
         const contacts = this.state.contacts
-        console.log(contacts)
         localStorage.setItem('Contacts', JSON.stringify(contacts))
+      } else {
         const lcContacts = JSON.parse(localStorage.getItem('Contacts'));
         this.setState({
         contacts: lcContacts
         })
+      }
     }
 
     componentDidUpdate() {
